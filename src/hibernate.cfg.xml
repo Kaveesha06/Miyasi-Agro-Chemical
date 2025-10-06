@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/miyasidb?useSSL=false</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Kaveesh3841k</property>
+        <property name="hibernate.show_sql">true</property> <!-- not importan | this show the query that hibernate write -->     
+        <mapping class="hibernate.Admin" />
+        <mapping class="hibernate.Grain" />
+        <mapping class="hibernate.Brand" />
+        <mapping class="hibernate.Company" />
+        <mapping class="hibernate.Customer" />
+        <mapping class="hibernate.Product" />
+        <mapping class="hibernate.Stock" />
+        <mapping class="hibernate.GRNItem" />
+        <mapping class="hibernate.GRN" />
+        <mapping class="hibernate.SaleItem" />
+        <mapping class="hibernate.Sale" />
+        <mapping class="hibernate.CustomerReturnItem" />
+        <mapping class="hibernate.CustomerReturn" />
+        <mapping class="hibernate.Return" />
+    </session-factory>
+</hibernate-configuration>
