@@ -3,8 +3,7 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Apache_NetBeans_Logo.svg" alt="NetBeans" width="70"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="70"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="70"/>
-  
-  
+
   
   <h1 align="center">💻 Miyasi Agro Chemical - Inventory Management System</h1>
   <p align="center">
@@ -68,31 +67,15 @@ This project follows the **Model–View–Controller (MVC)** architecture:
 
 ## 📸 Screenshots
 
-![Dashboard](screenshots/dashboard.png)
-![Product Management](screenshots/product_management.png)
-![Billing Screen](screenshots/billing_screen.png)
+Product Selling :- <img width="1594" height="762" alt="productSelling" src="https://github.com/user-attachments/assets/11dc8bbe-513a-4bca-bba0-a7858d99325d" />
+
+GRN :- <img width="1606" height="769" alt="P_GRN" src="https://github.com/user-attachments/assets/e5b3b606-5e72-4b28-b70f-2cc774c8c83d" />
+
+Report :- <img width="1612" height="757" alt="repo" src="https://github.com/user-attachments/assets/872665a2-2c40-4080-9cd7-520eebe9a2ec" />
+
+
 
 ---
-
-<!---
-
-
-## 🙋‍♂️ Author
-- **👤 Kaveesha**
-- 📧 Email:       [kaveeshaarchana2003@gmail.com]
-- **🌐 LinkedIn:**    [Kaveesha Archana](www.linkedin.com/in/kaveesha-archana)
-
----
-
-## 👨‍💻 Contributing
-
-- **👤 Name: Isuru Priyamantha**
-- **🌐 GitHub:**    [Isuru20ip](https://github.com/isuru20ip)
-
-- **👤 Name: Matheesha Narasinghe**
-- **🌐 GitHub:**    [Matheesha01](https://github.com/Matheesha01)
-
---->
 
 ## 🙋‍♂️ Author
 
