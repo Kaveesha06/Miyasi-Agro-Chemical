@@ -7,7 +7,7 @@
   
 
   
-  <h1 align="center">💻 Miyasi Agro Chemical - Inventory Management System</h1>
+  <h1 align="center">💻 Miyasi Agro Chemical</h1>
   <p align="center">
     A desktop-based Inventory Management System built with <b>Java, Hibernate ORM, MySQL</b>, and designed using <b>NetBeans GUI Builder</b>.
   </p>
