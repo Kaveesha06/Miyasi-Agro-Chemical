@@ -23,7 +23,7 @@
   <img src="https://img.shields.io/badge/Database-MySQL-blue?style=for-the-badge&logo=mysql"/>
   <img src="https://img.shields.io/badge/IDE-NetBeans-purple?style=for-the-badge&logo=apachenetbeanside"/>
   <img src="https://img.shields.io/badge/ORM-Hibernate-59666C?style=for-the-badge&logo=hibernate"/>
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/>
+  <!-- <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/> -->
 </p>
 
 ---
