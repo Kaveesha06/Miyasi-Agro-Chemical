@@ -39,7 +39,7 @@ It helps store owners manage their **product inventory, supplier records, sales,
 
 | Technology | Description |
 |-------------|-------------|
-| 🟦 **Java (JDK 8+)** | Core logic and GUI development |
+| 🟦 **Java (JDK 21)** | Core logic and GUI development |
 | 🟨 **MySQL** | Database management system |
 | 🧩 **Hibernate ORM** | Object-relational mapping framework |
 | 🧱 **NetBeans GUI Builder** | Used to design a clean, user-friendly interface |
