@@ -289,6 +289,7 @@ public class StockLevel extends javax.swing.JPanel {
 
     private List<Stock> current;
     private Stock stock;
+    
 
     public void clearField() {
         stockId.setText("");

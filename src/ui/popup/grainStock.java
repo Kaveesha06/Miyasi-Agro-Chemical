@@ -1,21 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package ui.popup;
 
-/**
- *
- * @author Asus
- */
+import hibernate.Grain;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 public class grainStock extends javax.swing.JDialog {
 
-    /**
-     * Creates new form grainStock
-     */
+    private SessionFactory sessionFactory;
     public grainStock(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.sessionFactory = hibernate.HibernateUtil.getSessionFactory();
     }
 
     /**
@@ -34,11 +34,18 @@ public class grainStock extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Grain Stock");
 
+        jTable1.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -113,7 +120,12 @@ public class grainStock extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        loadTable();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -164,4 +176,27 @@ public class grainStock extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private Grain grain;
+
+    List<Grain> grains;
+
+private void loadTable() {
+
+    Session session = sessionFactory.openSession();
+    Criteria criteria = session.createCriteria(Grain.class);
+
+    // 🔥 Load grains from DB into the list
+    grains = criteria.list();   
+
+    DefaultTableModel stock = (DefaultTableModel) jTable1.getModel();
+    stock.setRowCount(0);
+
+    for (Grain grain : grains) {
+        stock.addRow(new Object[] { grain.getName(), grain.getQty() });
+    }
+
+    this.jTable1.setModel(stock);
+    session.close();
+    }
 }
