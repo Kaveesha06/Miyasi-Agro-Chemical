@@ -102,7 +102,7 @@ public class GrainsSelling extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(74, 85, 104));
         jLabel2.setText("Grains :");
 
-        grainsName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        grainsName.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
         grainsName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         grainsName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -285,7 +285,7 @@ public class GrainsSelling extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(248, 249, 250));
 
-        sellingGrainsTable.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        sellingGrainsTable.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
         sellingGrainsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -98,14 +98,14 @@ public class BuyGrains extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(74, 85, 104));
         jLabel1.setText("Name :");
 
-        grainsName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        grainsName.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
         grainsName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 grainsNameKeyReleased(evt);
             }
         });
 
-        gList.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        gList.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
         gList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -167,7 +167,7 @@ public class BuyGrains extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(248, 249, 250));
 
         grainTable.setBackground(new java.awt.Color(248, 249, 250));
-        grainTable.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        grainTable.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
         grainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
