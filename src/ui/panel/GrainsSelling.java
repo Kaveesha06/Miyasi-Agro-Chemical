@@ -1,11 +1,16 @@
 package ui.panel;
 
 import hibernate.Grain;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,6 +28,7 @@ public class GrainsSelling extends javax.swing.JPanel {
         initComponents();
         totalPrice.setEditable(false);
         balance.setEditable(false);
+        jTextField1.setEnabled(false);
         PromptSupport.setPrompt("0.00", price);
 
         gList = new ArrayList();
@@ -175,6 +181,7 @@ public class GrainsSelling extends javax.swing.JPanel {
             }
         });
 
+        jPanel6.setBackground(new java.awt.Color(248, 249, 250));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -291,7 +298,7 @@ public class GrainsSelling extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Grains", "Unit Price", "Quantity", "Amount"
+                "Grains", "Quantity", "Unit Price", "Amount"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -334,7 +341,7 @@ public class GrainsSelling extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(74, 85, 104));
         jLabel7.setText("Balance :");
 
-        balance.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("'Rs.' #,##0.00' /-'"))));
+        balance.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("'Rs.'#,##0.00'/-'"))));
         balance.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         balance.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
@@ -614,8 +621,8 @@ public class GrainsSelling extends javax.swing.JPanel {
         for (Grain g : gList) {
             Vector vector = new Vector();
             vector.add(g.getName());
-            vector.add(g.getSelling_price());
             vector.add(g.getQty());
+            vector.add(g.getSelling_price());
 
             double itemTotal = g.getQty() * g.getSelling_price();
             vector.add(itemTotal);
@@ -625,6 +632,12 @@ public class GrainsSelling extends javax.swing.JPanel {
 
             this.totalPrice.setText(String.valueOf(total));
         }
+    }
+    private static int billCounter = 1;
+
+    private static String generateBillId() {
+        String date = new SimpleDateFormat("MMdd").format(new Date());
+        return "BILL-" + date + "-" + (billCounter++);
     }
 
     private void save() {
@@ -639,23 +652,66 @@ public class GrainsSelling extends javax.swing.JPanel {
             return;
         }
 
+        String total = String.valueOf(this.totalPrice.getText());
+        String paid = String.valueOf(this.paidAmount.getText());
+        String balance1 = String.valueOf(this.balance.getText());
+
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        try {
-            for (Grain grain : gList) {
-                Grain g = (Grain) session.get(Grain.class, grain.getId());
-                double newqty = g.getQty() - grain.getQty();
-                g.setQty(newqty);
-                session.save(g);
+        int choice = JOptionPane.showConfirmDialog(
+                null,
+                "Do you want to print the bill?",
+                "Print Confirmation",
+                JOptionPane.YES_NO_OPTION
+        );
 
+        if (choice == JOptionPane.YES_OPTION) {
+
+            try {
+                for (Grain grain : gList) {
+                    Grain g = (Grain) session.get(Grain.class, grain.getId());
+                    double newqty = g.getQty() - grain.getQty();
+                    g.setQty(newqty);
+                    session.save(g);
+
+                }
+
+                JRTableModelDataSource dataSourse = new JRTableModelDataSource(sellingGrainsTable.getModel());
+                HashMap<String, Object> parm = new HashMap<>();
+                String billId = generateBillId();
+                parm.put("Parameter1", billId);
+                parm.put("Parameter2", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+
+                parm.put("Parameter5", total);
+                parm.put("Parameter6", paid);
+                parm.put("Parameter7", balance1);
+
+                String in = "C:\\pos\\grainbill1.jasper";
+                new util.Reporting().printReport(in, parm, dataSourse);
+
+                transaction.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                transaction.rollback();
+                Message.error("Something Went Wrong Plase Try Agin", "Database Error");
             }
-            printBill(gList);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            transaction.rollback();
-            Message.error("Something Went Wrong Plase Try Agin", "Database Error");
+
+        } else {
+            try {
+                for (Grain grain : gList) {
+                    Grain g = (Grain) session.get(Grain.class, grain.getId());
+                    double newqty = g.getQty() - grain.getQty();
+                    g.setQty(newqty);
+                    session.save(g);
+
+                }
+                transaction.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                transaction.rollback();
+                Message.error("Something Went Wrong Plase Try Agin", "Database Error");
+            }
         }
 
         clear();
@@ -665,6 +721,7 @@ public class GrainsSelling extends javax.swing.JPanel {
         totalPrice.setText("");
         paidAmount.setText("");
         balance.setText("");
+
 
     }
 
@@ -676,7 +733,22 @@ public class GrainsSelling extends javax.swing.JPanel {
     }
 
     private void printBill(List<Grain> gList) {
-        
+
+//        JRTableModelDataSource dataSourse = new JRTableModelDataSource(jTable1.getModel());
+//            HashMap<String, Object> parm = new HashMap<>();
+//            parm.put("Parameter1", String.valueOf(sid));
+//            parm.put("Parameter2", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+//            parm.put("Parameter3", subTotal);
+//            parm.put("Parameter4", dicount);
+//            parm.put("Parameter5", total);
+//            parm.put("Parameter6", paid);
+//            parm.put("Parameter7", balance);
+//
+//            String in = "C:\\pos\\bill1.jasper";
+//            new util.Reporting().printReport(in, parm, dataSourse);
+//
+//            transaction.commit();
+//            clearAll();
     }
 
     private void setBalcne() {
