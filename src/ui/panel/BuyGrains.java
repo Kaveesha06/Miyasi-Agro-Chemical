@@ -612,10 +612,8 @@ public class BuyGrains extends javax.swing.JPanel {
                         parm.put("Parameter2", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 
                         parm.put("Parameter5", total);
-                        parm.put("Parameter6", "NULL");
-                parm.put("Parameter7", "NULL");
 
-                        String in = "C:\\pos\\grainbill1.jasper";
+                        String in = "C:\\pos\\graigrn1_1.jasper";
                         new util.Reporting().printReport(in, parm, dataSourse);
 
                     }
