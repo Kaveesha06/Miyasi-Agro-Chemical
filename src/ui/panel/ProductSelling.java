@@ -128,7 +128,7 @@ public class ProductSelling extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Product Name", "Qty", "Unit Price", "Total amount for items"
+                "Product Name", "Quantity", "Unit Price", "Total amount for items"
             }
         ) {
             Class[] types = new Class [] {

@@ -1,13 +1,20 @@
 package ui.panel;
 
 import hibernate.Grain;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -173,7 +180,7 @@ public class BuyGrains extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Buying Price", "Quantity", "Total"
+                "Name", "Quantity", "Buying Price", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -373,7 +380,11 @@ public class BuyGrains extends javax.swing.JPanel {
     }//GEN-LAST:event_addtoListActionPerformed
 
     private void viewReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewReportActionPerformed
-        Save();
+        try {
+            Save();
+        } catch (JRException ex) {
+            java.util.logging.Logger.getLogger(BuyGrains.class.getName()).log(Level.SEVERE, "JRException", ex);
+        }
     }//GEN-LAST:event_viewReportActionPerformed
 
 
@@ -529,8 +540,8 @@ public class BuyGrains extends javax.swing.JPanel {
         for (Grain grain : grainsList) {
             Vector vector = new Vector();
             vector.add(grain.getName());
-            vector.add(grain.getBuying_price());
             vector.add(grain.getQty());
+            vector.add(grain.getBuying_price());
             vector.add(grain.getBuying_price() * grain.getQty());
             model.addRow(vector);
             setTotal();
@@ -557,7 +568,17 @@ public class BuyGrains extends javax.swing.JPanel {
         this.grainsList = new ArrayList<>();
     }
 
-    private void Save() {
+    private static int billCounter = 1;
+
+    private static String generateBillId() {
+        String date = new SimpleDateFormat("MMdd").format(new Date());
+        return "BILL-" + date + "-" + (billCounter++);
+    }
+
+    private void Save() throws JRException {
+
+        String total = String.valueOf(this.totalPrice.getText());
+
         if (grainsList.isEmpty()) {
             Message.error("Product Not In the List", "Iteam Not found");
         } else {
@@ -575,6 +596,27 @@ public class BuyGrains extends javax.swing.JPanel {
                     double newqty = g.getQty() + grain.getQty();
 
                     System.out.println(g.getQty() + " + " + grain.getQty() + " = " + newqty);
+
+                    int choice = JOptionPane.showConfirmDialog(
+                            null,
+                            "Do you want to print the bill?",
+                            "Print Confirmation",
+                            JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (choice == JOptionPane.YES_OPTION) {
+                        JRTableModelDataSource dataSourse = new JRTableModelDataSource(grainTable.getModel());
+                        HashMap<String, Object> parm = new HashMap<>();
+                        String billId = generateBillId();
+                        parm.put("Parameter1", billId);
+                        parm.put("Parameter2", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+
+                        parm.put("Parameter5", total);
+
+                        String in = "C:\\pos\\graigrn1_1.jasper";
+                        new util.Reporting().printReport(in, parm, dataSourse);
+
+                    }
 
                     g.setQty(newqty);
                     session.save(g);
