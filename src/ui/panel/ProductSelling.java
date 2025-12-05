@@ -4,6 +4,7 @@ import hibernate.Customer;
 import hibernate.Sale;
 import hibernate.SaleItem;
 import hibernate.Stock;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -181,9 +182,8 @@ public class ProductSelling extends javax.swing.JPanel {
         });
 
         balance.setEditable(false);
-        balance.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        balance.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("'Rs.'#,##0.00'/-'"))));
         balance.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        balance.setText("NAN");
         balance.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         price.setEditable(false);
@@ -744,7 +744,8 @@ public class ProductSelling extends javax.swing.JPanel {
             Message.sucsses("Product Not Found", "Valication Error");
         }
     }
-
+    
+    DecimalFormat df = new DecimalFormat("#.00");   
     private void loadTable() {
         subTotal = 0;
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -770,7 +771,8 @@ public class ProductSelling extends javax.swing.JPanel {
             model.addRow(vector);
             dk.setText("");
             paid.setText("");
-            subT.setText(String.valueOf(subTotal));
+            subT.setText(df.format(subTotal));
+//            subT.setText(String.valueOf(subTotal));
             this.total.setText(String.valueOf(Grndtotal));
         }
     }
@@ -923,9 +925,12 @@ public class ProductSelling extends javax.swing.JPanel {
                 Double paidAmount = Double.parseDouble(paid.getText());
 
                 Double balanceA = Grndtotal - paidAmount;
-
+                DecimalFormat rsdf = new DecimalFormat("'Rs.' #,##0.00'/-'");
+                
                 if (balanceA <= 0) {
-                    balance.setText(String.valueOf(balanceA));
+//                    balance.setText(String.format("%.2f",balanceA));
+                    balance.setText(rsdf.format(balanceA));
+                    
                     print.setEnabled(true);
                     return;
                 }
@@ -948,18 +953,19 @@ public class ProductSelling extends javax.swing.JPanel {
                 double discount = Double.parseDouble(dk.getText());
                 if (discount > 0 && subTotal > discount) {
                     Grndtotal = subTotal - discount;
-                    total.setText(String.valueOf(Grndtotal));
+                    total.setText(df.format(Grndtotal));
                 } else {
                     Message.warning("Invalid Discount Type", "Validation Error");
-                    total.setText(String.valueOf(subTotal));
+                    total.setText(df.format(subTotal));
                 }
             } catch (Exception e) {
-                total.setText(String.valueOf(subTotal));
+                total.setText(df.format(subTotal));
                 Message.warning("Invalid Discount Type", "Validation Error");
             }
 
         } else {
-            total.setText(String.valueOf(subTotal));
+            total.setText(df.format(subTotal));
+            
         }
     }
 
