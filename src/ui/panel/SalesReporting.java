@@ -423,10 +423,10 @@ public class SalesReporting extends javax.swing.JPanel {
                                 Object[] existingRow = itemMap.get(stockId);
 
                                 double newQty = (Double) existingRow[4] + item.getQuantity();
-                                double newIncome = (Double) existingRow[5] + item.getStock().getPrice() * item.getQuantity();
+                                double newIncome = (Double) existingRow[6] + item.getStock().getPrice() * item.getQuantity();
 
                                 existingRow[4] = newQty;
-                                existingRow[5] = newIncome;
+                                existingRow[6] = newIncome;
 
                                 itemMap.put(stockId, existingRow);
 
@@ -524,10 +524,10 @@ public class SalesReporting extends javax.swing.JPanel {
                                 Object[] existingRow = itemMap.get(stockId);
 
                                 double newQty = (Double) existingRow[4] + item.getQuantity();
-                                double newIncome = (Double) existingRow[5] + item.getStock().getPrice() * item.getQuantity();
+                                double newIncome = (Double) existingRow[6] + item.getStock().getPrice() * item.getQuantity();
 
                                 existingRow[4] = newQty;
-                                existingRow[5] = newIncome;
+                                existingRow[6] = newIncome;
 
                                 itemMap.put(stockId, existingRow);
 

@@ -1,6 +1,7 @@
 package ui.panel;
 
 import hibernate.Grain;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -752,6 +753,7 @@ public class GrainsSelling extends javax.swing.JPanel {
     }
 
     private void setBalcne() {
+        DecimalFormat rsdf = new DecimalFormat("'Rs.' #,##0.00'/-'");
         try {
             double total = Double.parseDouble(totalPrice.getText());
             double paid = Double.parseDouble(paidAmount.getText());
@@ -760,7 +762,7 @@ public class GrainsSelling extends javax.swing.JPanel {
 
             if (blnc <= 0) {
                 sell.setEnabled(true);
-                balance.setText(String.valueOf(blnc));
+                balance.setText(rsdf.format(blnc));
             } else {
                 sell.setEnabled(false);
             }
