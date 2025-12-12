@@ -3,6 +3,7 @@ package ui;
 import hibernate.Admin;
 import hibernate.HibernateUtil;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.SwingWorker;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -73,11 +74,21 @@ public class Signin extends javax.swing.JFrame {
         userName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         userName.setForeground(new java.awt.Color(0, 51, 0));
         userName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 0), 2, true));
+        userName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                userNameKeyReleased(evt);
+            }
+        });
 
         password.setBackground(new java.awt.Color(204, 255, 204));
         password.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         password.setForeground(new java.awt.Color(0, 51, 0));
         password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 0), 2, true));
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                passwordKeyReleased(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(102, 255, 102));
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
@@ -202,6 +213,18 @@ public class Signin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         adminValidation();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void userNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            password.grabFocus();
+        }
+    }//GEN-LAST:event_userNameKeyReleased
+
+    private void passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButton1.grabFocus();
+        }
+    }//GEN-LAST:event_passwordKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
