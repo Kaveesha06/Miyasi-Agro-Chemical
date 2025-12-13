@@ -224,7 +224,6 @@ public class AddNewProduct extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        producttable.setColumnSelectionAllowed(true);
         producttable.getTableHeader().setReorderingAllowed(false);
         producttable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -232,7 +231,6 @@ public class AddNewProduct extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(producttable);
-        producttable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (producttable.getColumnModel().getColumnCount() > 0) {
             producttable.getColumnModel().getColumn(2).setResizable(false);
         }
@@ -631,7 +629,6 @@ public class AddNewProduct extends javax.swing.JPanel {
             return;
         }
         if (productName.length() > 80) {
-//            ToastUtil.showWarning("Product name must be shorter than 80 characters.");
             Alert.show("Product was lagest ", Alert.AlertType.WARNING);
             return;
         }

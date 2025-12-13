@@ -34,7 +34,7 @@ public class ProductSelling extends javax.swing.JPanel {
 
         kg.setEnabled(false);
         g.setEnabled(false);
-        
+//        pid.grabFocus();
         java.awt.EventQueue.invokeLater(() -> pid.requestFocusInWindow());
     }
 
@@ -741,7 +741,7 @@ public class ProductSelling extends javax.swing.JPanel {
             }
             loadTable();
         } else {
-            Message.sucsses("Product Not Found", "Valication Error");
+            Message.warning("Product Not Found", "Valication Error");
         }
     }
     

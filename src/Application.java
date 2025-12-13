@@ -1,4 +1,5 @@
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -20,17 +21,18 @@ public class Application {
 
 //    // setup look and feels into UI manager
     static {
-        try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            logger.error("Setting look and feel loading Error", e);
-
-        }
+        FlatMacLightLaf.setup();
+//        try {
+//            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (Exception e) {
+//            logger.error("Setting look and feel loading Error", e);
+//
+//        }
     }
 
 }
