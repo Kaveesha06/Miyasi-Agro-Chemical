@@ -69,11 +69,18 @@ This project follows the **Model–View–Controller (MVC)** architecture:
 
 ## 📸 Screenshots
 
-Product Selling :- <img width="1594" height="762" alt="productSelling" src="https://github.com/user-attachments/assets/11dc8bbe-513a-4bca-bba0-a7858d99325d" />
+Signin :- 
+  <img width="524" height="707" alt="Screenshot 2025-12-28 215409" src="https://github.com/user-attachments/assets/27c2f5b8-0f78-4206-93ee-44ae3e3080b4" />
 
-GRN :- <img width="1606" height="769" alt="P_GRN" src="https://github.com/user-attachments/assets/e5b3b606-5e72-4b28-b70f-2cc774c8c83d" />
+Product Selling :- 
+  <img width="1610" height="845" alt="Screenshot 2025-12-28 215836" src="https://github.com/user-attachments/assets/4619770c-7985-4f1a-8952-44783132de0d" />
 
-Report :- <img width="1612" height="757" alt="repo" src="https://github.com/user-attachments/assets/872665a2-2c40-4080-9cd7-520eebe9a2ec" />
+GRN :- 
+  <img width="1606" height="847" alt="Screenshot 2025-12-28 220030" src="https://github.com/user-attachments/assets/e20f075d-ce7f-4608-a55a-49337cba5bfa" />
+
+Report :- 
+  <img width="1615" height="850" alt="Screenshot 2025-12-28 220510" src="https://github.com/user-attachments/assets/acddef23-d47e-4212-a93b-74bb885196de" />
+
 
 
 
